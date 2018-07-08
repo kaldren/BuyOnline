@@ -25,7 +25,7 @@ namespace BuyOnline.Models
 
             base.OnModelCreating(modelBuilder);
         }
-}
+    }
 
     public class ProductConfiguration : EntityTypeConfiguration<Product>
     {
@@ -42,3 +42,4 @@ namespace BuyOnline.Models
 
         }
     }
+}

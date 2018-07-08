@@ -48,5 +48,21 @@ namespace BuyOnline.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Edit(int id)
+        {
+            var product = _context.Products.SingleOrDefault(p => p.Id == id);
+
+            var viewModel = new ProductFormViewModel
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Category = product.CategoryId,
+                Categories = _context.Categories.ToList()
+            };
+
+            return View(viewModel);
+        }
     }
 }
