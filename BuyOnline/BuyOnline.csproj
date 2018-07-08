@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +219,10 @@
     <Compile Include="Migrations\201807080703539_AddProductMigration.cs" />
     <Compile Include="Migrations\201807080703539_AddProductMigration.Designer.cs">
       <DependentUpon>201807080703539_AddProductMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807080759478_PopulateCategoriesTable.cs" />
+    <Compile Include="Migrations\201807080759478_PopulateCategoriesTable.Designer.cs">
+      <DependentUpon>201807080759478_PopulateCategoriesTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -290,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -310,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807080703539_AddProductMigration.resx">
       <DependentUpon>201807080703539_AddProductMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807080759478_PopulateCategoriesTable.resx">
+      <DependentUpon>201807080759478_PopulateCategoriesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
