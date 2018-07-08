@@ -1,0 +1,35 @@
+﻿@model BuyOnline.ViewModels.ProductFormViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create new product</h2>
+
+@using (Html.BeginForm("Create", "Product"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+    </div>
+    @*<div class="form-group">
+            <label for="exampleInputFile">Upload Photo</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Example block-level help text here.</p>
+        </div>*@
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "Id", "Name"), "", new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
