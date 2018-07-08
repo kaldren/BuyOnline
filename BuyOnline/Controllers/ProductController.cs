@@ -51,10 +51,11 @@ namespace BuyOnline.Controllers
 
         public ActionResult Edit(int id)
         {
-            var product = _context.Products.SingleOrDefault(p => p.Id == id);
+            var product = _context.Products.Single(p => p.Id == id);
 
             var viewModel = new ProductFormViewModel
             {
+                Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description,

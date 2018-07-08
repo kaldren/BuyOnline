@@ -21,14 +21,24 @@ namespace BuyOnline.Controllers.Api
         [HttpPost]
         public IHttpActionResult Update(int id, ProductFormViewModel viewModel)
         {
-            var product = _context.Products.SingleOrDefault(p => p.Id == id);
-            var category = _context.Categories.SingleOrDefault(p => p.Id == viewModel.Category);
+            var product = _context.Products.Single(p => p.Id == id);
+            var category = _context.Categories.Single(p => p.Id == viewModel.Category);
 
             product.Name = viewModel.Name;
             product.Price = viewModel.Price;
             product.Description = viewModel.Description;
             product.Category = category;
 
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var product = _context.Products.Single(p => p.Id == id);
+            _context.Products.Remove(product);
             _context.SaveChanges();
 
             return Ok();

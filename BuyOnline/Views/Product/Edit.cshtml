@@ -6,8 +6,6 @@
 
 <h2>Edit @Model.Name</h2>
 
-@Html.HiddenFor(m => m.Id, new { @class = "js-product-id" })
-
 <div class="form-group">
     @Html.LabelFor(m => m.Name)
     @Html.TextBoxFor(m => m.Name, new { @class = "form-control js-name" })
@@ -30,18 +28,19 @@
     @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "Id", "Name"), "", new { @class = "form-control js-category" })
 </div>
 
-<button type="submit" class="btn btn-primary js-edit-product">Update</button>
-<button type="submit" class="btn btn-danger js-remove-product">Remove</button>
+<button type="submit" class="btn btn-primary js-edit-product" data-product-id="@Model.Id">Update</button>
+<button type="submit" class="btn btn-danger js-remove-product" data-product-id="@Model.Id">Remove</button>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
 
-            var productId = $(".js-product-id").attr("value");
+            $(".js-edit-product").click(function (e) {
 
-            $(".js-edit-product").click(function () {
-                $.post("/api/product/" + productId,
+                var btnSource = $(e.target);
+
+                $.post("/api/product/" + btnSource.attr("data-product-id"),
                     {
                         Name: $(".js-name").val(),
                         Price: $(".js-price").val(),
@@ -56,20 +55,37 @@
                     });
             });
 
-            $(".js-remove-product").click(function() {
-                bootbox.confirm({
-                    message: "Are you sure you want to <strong>delete</strong> this product?",
+            $(".js-remove-product").click(function (e) {
+
+                var btnSource = $(e.target);
+
+                bootbox.dialog({
+                    message: "Are you sure you want to delete this product?",
+                    title: "Confirm",
                     buttons: {
-                        confirm: {
-                            label: "Yes, proceed",
-                            className: "btn-success"
+                        no: {
+                            label: "No",
+                            className: "btn-default",
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
                         },
-                        cancel: {
-                            label: "No, stop",
-                            className: "btn-danger"
+                        yes: {
+                            label: "Yes",
+                            className: "btn-danger",
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/product/" + btnSource.attr("data-product-id"),
+                                        method: "DELETE"
+                                    })
+                                    .done(function () {
+                                        alert("DONE!");
+                                    })
+                                    .fail(function () {
+                                        alert("Something failed!");
+                                    });
+                            }
                         }
-                    },
-                    callback: function (result) {
                     }
                 });
             });
