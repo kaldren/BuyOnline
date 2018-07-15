@@ -65,5 +65,23 @@ namespace BuyOnline.Controllers
 
             return View(viewModel);
         }
+
+        public ActionResult View(int id)
+        {
+            var product = _context.Products.Single(p => p.Id == id);
+            var category = _context.Categories.Single(c => c.Id == product.CategoryId);
+
+            var viewModel = new ProductFormViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                CategoryName = category.Name
+            };
+
+            return View(viewModel);
+        }
+
     }
 }
